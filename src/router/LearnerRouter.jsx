@@ -1,10 +1,8 @@
-import { Breadcrumb, Layout, Menu, theme } from "antd";
-const { Header, Content, Footer } = Layout;
-
-const items = new Array(15).fill(null).map((_, index) => ({
-  key: index + 1,
-  label: `nav ${index + 1}`,
-}));
+import { Breadcrumb, Button, Flex, Input, Layout, theme } from "antd";
+import { Outlet } from "react-router-dom";
+import HeaderComponent from "../components/HeaderComponent";
+import FooterComponent from "../components/FooterComponent";
+const { Content } = Layout;
 
 const LearnerRouter = () => {
   const {
@@ -13,65 +11,22 @@ const LearnerRouter = () => {
 
   return (
     <Layout>
-      <Header
-        className="bg-white shadow-2xl flex items-center"
-        Header
-        style={{
-          position: "sticky",
-          top: 0,
-          zIndex: 1,
-          width: "100%",
-          display: "flex",
-          alignItems: "center",
-          backgroundColor: "white",
-          boxShadow:
-            "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1)",
-        }}
-      >
-        <div />
-        {/* <Menu
-          theme="light"
-          mode="horizontal"
-          defaultSelectedKeys={["2"]}
-          items={items}
-          style={{
-            flex: 1,
-            minWidth: 0,
-          }}
-        /> */}
-      </Header>
+      <HeaderComponent />
       <Content
+        className="bg-white"
         style={{
           padding: "0 48px",
         }}
       >
-        <Breadcrumb
-          style={{
-            margin: "16px 0",
-          }}
-        >
-          <Breadcrumb.Item>Home</Breadcrumb.Item>
-          <Breadcrumb.Item>List</Breadcrumb.Item>
-          <Breadcrumb.Item>App</Breadcrumb.Item>
-        </Breadcrumb>
         <div
           style={{
-            background: colorBgContainer,
-            minHeight: 280,
-            padding: 24,
-            borderRadius: borderRadiusLG,
+            minHeight: "100vh",
           }}
         >
-          Content
+          <Outlet />
         </div>
       </Content>
-      <Footer
-        style={{
-          textAlign: "center",
-        }}
-      >
-        Ant Design ©{new Date().getFullYear()} Created by Ant UED
-      </Footer>
+      <FooterComponent />
     </Layout>
   );
 };

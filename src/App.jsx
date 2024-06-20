@@ -1,9 +1,10 @@
 import LearnerRouter from "./router/LearnerRouter";
+import MentorRoute from "./router/MentorRoute";
 
 function App() {
   return (
     <>
-      <LearnerRouter />
+      <MentorRoute />
     </>
   );
 }

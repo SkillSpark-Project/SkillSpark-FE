@@ -1,6 +1,6 @@
+@tailwind base;
 @tailwind components;
 @tailwind utilities;
-@tailwind base;
 
 body {
   margin: 0;
@@ -8,17 +8,28 @@ body {
   min-height: 50vh;
   display: flex;
   flex-direction: column;
+  font-family: "Circular", sans-serif;
+  --primary-color: #26a59a;
 }
-
-html {
-  font-family: "IBM Plex Sans", sans-serif;
-  src: url(./fonts/IBMPlexSans-Thin.ttf);
-}
-
 @font-face {
-  font-family: montserrat;
-  src: url(./fonts/Montserrat-VariableFont_wght.ttf);
+  font-family: "Circular";
+  src: url("path/to/circular.woff2") format("woff2"),
+    url("path/to/circular.woff") format("woff");
+  font-weight: 300 700; /* Điều chỉnh trọng số của font chữ tùy theo nhu cầu */
+  font-style: normal;
 }
-.montserrat {
-  font-family: montserrat;
+
+.button-border-hover-green:hover {
+  border-color: #26a59a !important;
+  color: #26a59a !important;
+}
+
+.button-full-hover-green:hover {
+  border-color: #26a59a !important;
+  color: #26a59a !important;
+}
+
+.input-hover-green:focus,
+.input-hover-green:hover {
+  border-color: #26a59a !important;
 }
