@@ -2,6 +2,7 @@ import { Breadcrumb, Button, Flex, Input, Layout, theme } from "antd";
 import logo from "../assets/logoskillver.png";
 import { SearchOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 import { Outlet } from "react-router-dom";
+import DropdownCate from "./DropdownCate";
 const { Content, Footer, Header } = Layout;
 const boxStyle = {
   width: "100%",
@@ -12,7 +13,6 @@ const HeaderComponent = () => {
     <>
       <Header
         className="bg-white shadow-2xl flex items-center"
-        Header
         style={{
           position: "sticky",
           top: 0,
@@ -30,13 +30,12 @@ const HeaderComponent = () => {
           <div className="flex justify-center items-center h-screen">
             <img src={logo} alt="Logo" className="w-32" />
           </div>
-          <div className=" font-semibold">Thể loại</div>
+          <DropdownCate />
 
           <Input
-            className="rounded-full border-black w-80 transition-all duration-300 input-hover-green "
+            className="rounded-full border-black w-96 transition-all duration-300 input-hover-green "
             size="large"
             placeholder="Tìm khiếm khóa học..."
-            text-sm
             prefix={<SearchOutlined />}
           />
           <div className=" font-semibold">Giảng dạy trên SkillSpark</div>

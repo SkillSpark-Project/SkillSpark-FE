@@ -33,3 +33,14 @@ body {
 .input-hover-green:hover {
   border-color: #26a59a !important;
 }
+.title-div {
+  margin-bottom: 0.75rem;
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.text-hover-green:hover {
+  color: #26a59a !important;
+}
