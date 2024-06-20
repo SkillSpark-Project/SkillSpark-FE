@@ -1,14 +1,16 @@
-import { Breadcrumb, Button, Flex, Input, Layout, theme } from "antd";
+import { Badge, Breadcrumb, Button, Flex, Input, Layout, theme } from "antd";
 import logo from "../assets/logoskillver.png";
 import { SearchOutlined, ShoppingCartOutlined } from "@ant-design/icons";
-import { Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import DropdownCate from "./DropdownCate";
+import { useState } from "react";
 const { Content, Footer, Header } = Layout;
 const boxStyle = {
   width: "100%",
   height: "100%",
 };
 const HeaderComponent = () => {
+  const [show, setShow] = useState(true);
   return (
     <>
       <Header
@@ -28,7 +30,9 @@ const HeaderComponent = () => {
         <div />
         <Flex justify="space-evenly" align="center" style={boxStyle}>
           <div className="flex justify-center items-center h-screen">
-            <img src={logo} alt="Logo" className="w-32" />
+            <Link to="/">
+              <img src={logo} alt="Logo" className="w-32" />
+            </Link>
           </div>
           <DropdownCate />
 
@@ -37,23 +41,33 @@ const HeaderComponent = () => {
             size="large"
             placeholder="Tìm khiếm khóa học..."
             prefix={<SearchOutlined />}
+            allowClear
           />
           <div className=" font-semibold">Giảng dạy trên SkillSpark</div>
 
-          <ShoppingCartOutlined className="text-2xl" />
+          <a href="#" className="mt-3">
+            <Badge count={show ? 109 : 0} offset={[2, -2]}>
+              <ShoppingCartOutlined className="text-2xl" />
+            </Badge>
+          </a>
+
           <div>
-            <Button
-              size="large"
-              className="text-sm font-semibold text-center button-border-hover-green"
-            >
-              Đăng nhập
-            </Button>
-            <Button
-              size="large"
-              className="text-sm m-2 bg-[#26a59a] text-white font-semibold button-full-hover-green"
-            >
-              Đăng ký
-            </Button>
+            <Link to="/Login">
+              <Button
+                size="large"
+                className="text-sm font-semibold text-center button-border-hover-green"
+              >
+                Đăng nhập
+              </Button>
+            </Link>
+            <Link to="/Login">
+              <Button
+                size="large"
+                className="text-sm m-2 bg-[#26a59a] text-white font-semibold button-full-hover-green"
+              >
+                Đăng ký
+              </Button>
+            </Link>
           </div>
         </Flex>
       </Header>

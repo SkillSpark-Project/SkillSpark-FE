@@ -8,6 +8,7 @@ import {
 } from "@ant-design/icons";
 import { Button, Layout, Menu, theme } from "antd";
 import logo from "../assets/logoskillver.png";
+import { Outlet } from "react-router-dom";
 const { Header, Sider, Content } = Layout;
 const AdminRoute = () => {
   const [collapsed, setCollapsed] = useState(false);
@@ -95,7 +96,7 @@ const AdminRoute = () => {
             borderRadius: borderRadiusLG,
           }}
         >
-          Content
+          <Outlet />
         </Content>
       </Layout>
     </Layout>

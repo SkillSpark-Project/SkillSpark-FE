@@ -16,11 +16,12 @@ export function Banner() {
           <div className="w-2/5">
             <div className="text-5xl font-bold text-[#26a59a]">Skill Spark</div>
             <div className=" my-4">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nonne
-              merninisti licere mihi ista probare, quae sunt a te dicta? Refert
-              tamen, quo modo Lorem ipsum dolor sit amet, consectetur adipiscing
-              elit. Sed nonne merninisti licere mihi ista probare, quae sunt a
-              te dicta? Refert tamen, quo modo.
+              Skill Spark là nền tảng kết nối người học với giáo viên, giúp bạn
+              dễ dàng tìm kiếm và học các kỹ năng mới. Với đa dạng các khóa học
+              từ chuyên gia uy tín, Skill Spark mang đến trải nghiệm học tập
+              chất lượng và linh hoạt, phù hợp với nhu cầu và lịch trình của
+              bạn. Tham gia Skill Spark để khơi dậy đam mê và phát triển kỹ năng
+              ngay hôm nay!
             </div>
             <Button
               size="large"

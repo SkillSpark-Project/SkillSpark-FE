@@ -55,7 +55,7 @@ const DropdownCate = () => (
   >
     <a onClick={(e) => e.preventDefault()} text-hover-green>
       <Space>
-        <div className=" font-semibold text-hover-green">Thể loại</div>
+        <div className=" font-semibold text-hover-green">Danh Mục</div>
         <DownOutlined />
       </Space>
     </a>

@@ -2,6 +2,7 @@ import { Breadcrumb, Button, Flex, Input, Layout, theme } from "antd";
 import { Outlet } from "react-router-dom";
 import HeaderComponent from "../components/HeaderComponent";
 import FooterComponent from "../components/FooterComponent";
+import { PropagateLoader } from "react-spinners";
 const { Content } = Layout;
 
 const LearnerRouter = () => {
@@ -23,6 +24,7 @@ const LearnerRouter = () => {
             minHeight: "100vh",
           }}
         >
+          {/* <PropagateLoader color="#36d7b7" /> */}
           <Outlet />
         </div>
       </Content>

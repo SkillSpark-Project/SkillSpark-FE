@@ -8,15 +8,37 @@ body {
   min-height: 50vh;
   display: flex;
   flex-direction: column;
-  font-family: "Circular", sans-serif;
+  font-family: "Montserrat", sans-serif !important;
   --primary-color: #26a59a;
 }
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+div,
+span,
+a,
+li,
+ul,
+ol,
+table,
+th,
+td,
+input,
+button {
+  font-family: "Montserrat", sans-serif;
+}
 @font-face {
-  font-family: "Circular";
-  src: url("path/to/circular.woff2") format("woff2"),
-    url("path/to/circular.woff") format("woff");
-  font-weight: 300 700; /* Điều chỉnh trọng số của font chữ tùy theo nhu cầu */
-  font-style: normal;
+  font-family: montserrat;
+  src: url(./fonts/Montserrat-VariableFont_wght.ttf);
+}
+
+.montserrat {
+  font-family: montserrat;
 }
 
 .button-border-hover-green:hover {
@@ -33,12 +55,16 @@ body {
 .input-hover-green:hover {
   border-color: #26a59a !important;
 }
-.title-div {
+.sub-title-div {
   margin-bottom: 0.75rem;
-  font-size: 1.875rem;
-  line-height: 2.25rem;
-  font-weight: 600;
   text-align: center;
+  margin: 0 !important;
+  margin-bottom: 10px !important;
+}
+.title-div {
+  text-align: center;
+  color: #ef5250 !important;
+  margin: 0 !important;
 }
 
 .text-hover-green:hover {
