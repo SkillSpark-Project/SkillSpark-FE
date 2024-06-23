@@ -5,12 +5,15 @@ const instance = axios.create({
   baseURL: "https://skillspark.azurewebsites.net/api/",
 });
 const cookies = new Cookies();
+const currentUrl = window.location.href;
 instance.interceptors.request.use(
   function (config) {
     const user = cookies.get("user");
 
     const token = user?.token;
     config.headers["Authorization"] = `Bearer ${token}`;
+    config.headers["Referer"] = `${currentUrl}`;
+
     return config;
   },
   function (error) {

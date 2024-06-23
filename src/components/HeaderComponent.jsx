@@ -1,15 +1,36 @@
-import { Badge, Breadcrumb, Button, Flex, Input, Layout, theme } from "antd";
+import {
+  Avatar,
+  Badge,
+  Breadcrumb,
+  Button,
+  Flex,
+  Input,
+  Layout,
+  theme,
+} from "antd";
 import logo from "../assets/logoskillver.png";
-import { SearchOutlined, ShoppingCartOutlined } from "@ant-design/icons";
+import {
+  SearchOutlined,
+  ShoppingCartOutlined,
+  UserOutlined,
+  HeartOutlined,
+  BellOutlined,
+} from "@ant-design/icons";
 import { Link, Outlet } from "react-router-dom";
 import DropdownCate from "./DropdownCate";
 import { useState } from "react";
+import Cookies from "universal-cookie";
+import { useDispatch, useSelector } from "react-redux";
+import { allCategory } from "../redux/slice/categorySlide";
 const { Content, Footer, Header } = Layout;
 const boxStyle = {
   width: "100%",
   height: "100%",
 };
 const HeaderComponent = () => {
+  const cookies = new Cookies();
+  const dispatch = useDispatch();
+  const userInfo = cookies.get("user");
   const [show, setShow] = useState(true);
   return (
     <>
@@ -43,32 +64,62 @@ const HeaderComponent = () => {
             prefix={<SearchOutlined />}
             allowClear
           />
-          <div className=" font-semibold">Giảng dạy trên SkillSpark</div>
+          {userInfo && userInfo?.listRoles?.includes("Mentor") ? (
+            <div className=" font-semibold">Giảng dạy</div>
+          ) : (
+            <div className=" font-semibold">Giảng dạy trên SkillSpark</div>
+          )}
+          {userInfo ? <div className=" font-semibold">Học tập</div> : <></>}
+          {userInfo ? (
+            <a href="#" className="mt-3 hover:text-[#26a59a]">
+              <HeartOutlined className="text-2xl mt-3" />
+            </a>
+          ) : (
+            <></>
+          )}
 
-          <a href="#" className="mt-3">
+          <a href="#" className="mt-3 hover:text-[#26a59a]">
             <Badge count={show ? 109 : 0} offset={[2, -2]}>
               <ShoppingCartOutlined className="text-2xl" />
             </Badge>
           </a>
-
-          <div>
-            <Link to="/Login">
-              <Button
-                size="large"
-                className="text-sm font-semibold text-center button-border-hover-green"
-              >
-                Đăng nhập
-              </Button>
-            </Link>
-            <Link to="/Login">
-              <Button
-                size="large"
-                className="text-sm m-2 bg-[#26a59a] text-white font-semibold button-full-hover-green"
-              >
-                Đăng ký
-              </Button>
-            </Link>
-          </div>
+          {userInfo ? (
+            <a href="#" className="mt-3 hover:text-[#26a59a]">
+              <BellOutlined className="text-2xl mt-3" />
+            </a>
+          ) : (
+            <></>
+          )}
+          {userInfo ? (
+            <>
+              <a href="#">
+                {userInfo && userInfo?.Avatar != null ? (
+                  <Avatar size="large"></Avatar>
+                ) : (
+                  <Avatar size="large" icon={<UserOutlined />} />
+                )}
+              </a>
+            </>
+          ) : (
+            <div>
+              <Link to="/Login">
+                <Button
+                  size="large"
+                  className="text-sm font-semibold text-center button-border-hover-green"
+                >
+                  Đăng nhập
+                </Button>
+              </Link>
+              <Link to="/Register">
+                <Button
+                  size="large"
+                  className="text-sm m-2 bg-[#26a59a] text-white font-semibold button-full-hover-green"
+                >
+                  Đăng ký
+                </Button>
+              </Link>
+            </div>
+          )}
         </Flex>
       </Header>
     </>

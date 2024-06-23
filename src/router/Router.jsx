@@ -9,21 +9,26 @@ import MentorRoute from "./MentorRoute";
 import Cookies from "universal-cookie";
 import Login from "../pages/auths/Login";
 import { AnimatePresence } from "framer-motion";
+import Log from "../pages/auths/Log";
+import Register from "../pages/auths/Register";
 
 function Router() {
   const cookies = new Cookies();
   const userInfo = cookies.get("user");
-  console.log(userInfo);
 
   const element = useRoutes([
     {
       element: <LearnerRouter />,
       children: [
-        ...(!userInfo
+        ...(!userInfo //chua dang nhap
           ? [
               {
                 path: "/Login",
-                element: <Login />,
+                element: <Log />,
+              },
+              {
+                path: "/Register",
+                element: <Register />,
               },
               {
                 path: "*",
@@ -31,7 +36,7 @@ function Router() {
               },
             ]
           : []),
-        ...(userInfo?.role == "Learner"
+        ...(userInfo?.listRoles?.includes("Learner")
           ? [
               {
                 path: "*",
@@ -39,11 +44,21 @@ function Router() {
               },
             ]
           : []),
-        ...(!userInfo || userInfo?.role == "Learner"
+        ...(!userInfo || //nhung tin nang dung chung ma khong can dang nhap
+        userInfo?.listRoles?.includes("Learner") ||
+        userInfo?.listRoles?.includes("Mentor")
           ? [
               {
                 path: "/",
                 element: <Home />,
+              },
+            ]
+          : []),
+        ...(userInfo?.listRoles?.includes("Mentor") // nhung tin nang cua mentor thoi
+          ? [
+              {
+                path: "/mentor",
+                element: <MentorRoute />,
               },
             ]
           : []),
@@ -52,7 +67,7 @@ function Router() {
     {
       element: <MentorRoute />,
       children: [
-        ...(userInfo?.role == "Mentor"
+        ...(userInfo?.listRoles?.includes("Mentor")
           ? [
               {
                 path: "/mentor",
@@ -65,7 +80,7 @@ function Router() {
     {
       element: <AdminRoute />,
       children: [
-        ...(userInfo?.role == "Admin"
+        ...(userInfo?.listRoles?.includes("Admin")
           ? [
               {
                 path: "/admin",
@@ -76,7 +91,6 @@ function Router() {
       ],
     },
   ]);
-  console.log(element);
   if (!element) return null;
   return (
     <>
