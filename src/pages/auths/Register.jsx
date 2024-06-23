@@ -4,6 +4,7 @@ import {
   Checkbox,
   Col,
   ConfigProvider,
+  DatePicker,
   Divider,
   Flex,
   Form,
@@ -20,10 +21,13 @@ import {
   LockOutlined,
   GoogleOutlined,
   FacebookOutlined,
+  MailOutlined,
+  CalendarOutlined,
+  PhoneOutlined,
 } from "@ant-design/icons";
 import FormItem from "antd/es/form/FormItem";
 import Title from "antd/es/typography/Title";
-import { loginUser } from "../../redux/slice/authSlice";
+import { loginUser, registerAcc } from "../../redux/slice/authSlice";
 import Cookies from "universal-cookie";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -33,11 +37,9 @@ const boxStyle = {
   height: "100%",
 };
 const Register = () => {
-  const onFinish = (values) => {};
-  const onFinishFailed = (errorInfo) => {};
-
-  const [email, setEmail] = useState("");
-  const [pass, setPass] = useState("");
+  const onChange = (date, dateString) => {
+    console.log(date, dateString);
+  };
   const [form] = Form.useForm();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -47,24 +49,30 @@ const Register = () => {
   const userInfo = cookies?.get("user");
 
   const handleLogin = async (values) => {
+    console.log(values);
     try {
       setIsLoading(true);
-      const response = await loginUser({
-        email: values.username,
+      const response = await registerAcc({
+        email: values.email,
+        username: values.username,
+        fullname: values.fullname,
+        phoneNumber: values.phoneNumber,
+        birthday: values.birthday,
         password: values.password,
       });
-      if (userInfo != null) {
-        cookies.remove("user");
-      }
-      cookies.set("user", response, { path: "/" });
-      toast.success("Đăng nhập thành công.");
-      if (response.listRoles.includes("Learner")) {
-        navigate("/");
-      } else if (response.listRoles.includes("Admin")) {
-        navigate("/admin");
-      }
+
+      toast.success(response);
     } catch (error) {
-      toast.error(error.response.data.title);
+      error?.response?.data?.title == "One or more validation errors occurred."
+        ? toast.error("Vui lòng kiểm tra lại thông tin.")
+        : toast.error(error.response.data.title);
+      const errorData = error.response.data;
+      const errors = errorData.errors || errorData;
+      const fields = Object.keys(errors).map((field) => ({
+        name: field.toLowerCase(),
+        errors: errors[field],
+      }));
+      form.setFields(fields);
     } finally {
       setIsLoading(false);
     }
@@ -97,11 +105,11 @@ const Register = () => {
                 autoComplete="off"
               >
                 <Form.Item
-                  name="username"
+                  name="email"
                   rules={[
                     {
                       required: true,
-                      message: "Vui lòng nhập tên đăng nhập hoặc địa chỉ email",
+                      message: "Vui lòng nhập địa chỉ email",
                     },
                   ]}
                 >
@@ -110,12 +118,87 @@ const Register = () => {
                     allowClear
                     onChange={(e) => setEmail(e.target.value)}
                     size="large"
-                    placeholder="Tên đăng nhập hoặc địa chỉ email"
+                    type="email"
+                    placeholder="Địa chỉ email"
+                    className="border-black transition-all duration-300 input-hover-green"
+                    prefix={<MailOutlined />}
+                  />
+                </Form.Item>
+                <Form.Item
+                  name="username"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Vui lòng nhập tên đăng nhập",
+                    },
+                  ]}
+                >
+                  <Input
+                    disabled={isLoading}
+                    allowClear
+                    size="large"
+                    placeholder="Tên đăng nhập"
                     className="border-black transition-all duration-300 input-hover-green"
                     prefix={<UserOutlined />}
                   />
                 </Form.Item>
-
+                <Form.Item
+                  name="fullname"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Vui lòng nhập họ tên",
+                    },
+                  ]}
+                >
+                  <Input
+                    disabled={isLoading}
+                    allowClear
+                    size="large"
+                    placeholder="Họ tên"
+                    className="border-black transition-all duration-300 input-hover-green"
+                    prefix={<UserOutlined />}
+                  />
+                </Form.Item>
+                <Form.Item
+                  name="phoneNumber"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Vui lòng nhập số điện thoại",
+                    },
+                  ]}
+                >
+                  <Input
+                    disabled={isLoading}
+                    allowClear
+                    size="large"
+                    placeholder="Số điện thoại"
+                    className="border-black transition-all duration-300 input-hover-green"
+                    prefix={<PhoneOutlined />}
+                    type="number"
+                  />
+                </Form.Item>
+                <Form.Item
+                  name="birthday"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Vui lòng nhập ngày sinh",
+                    },
+                  ]}
+                >
+                  <DatePicker
+                    className="w-full border-black transition-all duration-300 input-hover-green"
+                    format={{
+                      format: "DD-MM-YYYY",
+                      type: "mask",
+                    }}
+                    placeholder="Ngày sinh"
+                    size="large"
+                    prefix={<MailOutlined />}
+                  />
+                </Form.Item>
                 <Form.Item
                   name="password"
                   rules={[
@@ -142,7 +225,7 @@ const Register = () => {
                     loading={isLoading}
                     className="text-sm  bg-[#26a59a] text-white font-semibold button-full-hover-green"
                   >
-                    Đăng nhập
+                    Đăng ký
                   </Button>
                 </Form.Item>
               </Form>
@@ -182,7 +265,7 @@ const Register = () => {
               </div>
             </div>
           </Col>
-          <Col span={12} className="px-10">
+          <Col span={12} className="px-10 m-auto">
             <img src={loginimg} />
           </Col>
         </Row>
