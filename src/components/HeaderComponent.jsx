@@ -22,6 +22,7 @@ import { useState } from "react";
 import Cookies from "universal-cookie";
 import { useDispatch, useSelector } from "react-redux";
 import { allCategory } from "../redux/slice/categorySlide";
+import DropdownProfile from "./DropdownProfile";
 const { Content, Footer, Header } = Layout;
 const boxStyle = {
   width: "100%",
@@ -91,15 +92,7 @@ const HeaderComponent = () => {
             <></>
           )}
           {userInfo ? (
-            <>
-              <a href="#">
-                {userInfo && userInfo?.Avatar != null ? (
-                  <Avatar size="large"></Avatar>
-                ) : (
-                  <Avatar size="large" icon={<UserOutlined />} />
-                )}
-              </a>
-            </>
+            <DropdownProfile userInfo={userInfo} />
           ) : (
             <div>
               <Link to="/Login">

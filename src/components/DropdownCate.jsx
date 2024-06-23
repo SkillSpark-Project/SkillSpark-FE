@@ -27,22 +27,7 @@ const DropdownCate = () => {
       setItems(temps);
     }
   }, [categories]);
-  useEffect(() => {
-    if (categories && categories.length > 0) {
-      const temps = categories.map((category) => ({
-        key: category.id,
-        label: (
-          <a target="_blank" rel="noopener noreferrer" href={category.id}>
-            {category.name}
-          </a>
-        ),
-        icon: category.icon ? <SmileOutlined /> : null,
-      }));
-      console.log("1111");
-      setItems(temps);
-    }
-  }, [categories]);
-  console.log(items);
+
   return (
     <Dropdown
       menu={{
