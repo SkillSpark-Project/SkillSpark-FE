@@ -25,7 +25,7 @@ import FormItem from "antd/es/form/FormItem";
 import Title from "antd/es/typography/Title";
 import { loginUser } from "../../redux/slice/authSlice";
 import Cookies from "universal-cookie";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const boxStyle = {
@@ -33,13 +33,14 @@ const boxStyle = {
   height: "100%",
 };
 const Log = () => {
-  const onFinish = (values) => {};
-  const onFinishFailed = (errorInfo) => {};
-
-  const [email, setEmail] = useState("");
-  const [pass, setPass] = useState("");
   const [form] = Form.useForm();
   const [isLoading, setIsLoading] = useState(false);
+
+  const location = useLocation();
+
+  const searchParams = new URLSearchParams(location.search);
+  const userId = searchParams.get("userId");
+  const code = searchParams.get("code");
 
   const cookies = new Cookies();
   const navigate = useNavigate();
