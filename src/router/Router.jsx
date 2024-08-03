@@ -11,6 +11,7 @@ import Login from "../pages/auths/Login";
 import { AnimatePresence } from "framer-motion";
 import Log from "../pages/auths/Log";
 import Register from "../pages/auths/Register";
+import CourseList from "../pages/learners/CoursePage/CourseList";
 
 function Router() {
   const cookies = new Cookies();
@@ -36,7 +37,7 @@ function Router() {
               },
             ]
           : []),
-        ...(userInfo?.listRoles?.includes("Learner")
+        ...(userInfo?.listRoles?.includes("Learner") //nhung tin nang mà chỉ learner thoi
           ? [
               {
                 path: "*",
@@ -51,6 +52,10 @@ function Router() {
               {
                 path: "/",
                 element: <Home />,
+              },
+              {
+                path: "/course",
+                element: <CourseList />,
               },
             ]
           : []),

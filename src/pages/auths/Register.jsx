@@ -94,7 +94,7 @@ const Register = () => {
                 <img src={logo} className="w-2/6 m-auto" />
               </a>
 
-              <div className="font-bold py-3 text-xl">Đăng Ký</div>
+              <div className="font-semibold py-3 text-xl">Đăng Ký</div>
               <Form
                 name="basic"
                 initialValues={{

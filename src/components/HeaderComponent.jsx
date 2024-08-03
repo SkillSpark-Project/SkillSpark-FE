@@ -51,7 +51,7 @@ const HeaderComponent = () => {
       >
         <div />
         <Flex justify="space-evenly" align="center" style={boxStyle}>
-          <div className="flex justify-center items-center h-screen">
+          <div className="flex justify-center items-center ">
             <Link to="/">
               <img src={logo} alt="Logo" className="w-32" />
             </Link>

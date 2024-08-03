@@ -3,6 +3,7 @@ import { DownOutlined, SmileOutlined } from "@ant-design/icons";
 import { Dropdown, Space } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { allCategory } from "../redux/slice/categorySlide";
+import { Link } from "react-router-dom";
 
 const DropdownCate = () => {
   const [items, setItems] = useState([]);
@@ -34,12 +35,12 @@ const DropdownCate = () => {
         items,
       }}
     >
-      <a onClick={(e) => e.preventDefault()}>
+      <Link to="/course">
         <Space>
           <div className=" font-semibold text-hover-green">Danh Mục</div>
           <DownOutlined />
         </Space>
-      </a>
+      </Link>
     </Dropdown>
   );
 };

@@ -12,12 +12,12 @@ const contentStyle = {
 const HomeCarousel = () => {
   return (
     <div className=" w-5/6 m-auto">
-      <Typography.Title level={4} className="title-div">
+      <div className="title-div text-xl font-semibold">
         --- NỔI BẬT NHẤT ---
-      </Typography.Title>
-      <Typography.Title level={3} className="sub-title-div">
+      </div>
+      <div className="sub-title-div text-lg font-semibold">
         Những lựa chọn hàng đầu của chúng tôi
-      </Typography.Title>
+      </div>
 
       <Carousel autoplay autoplaySpeed={5000} arrows>
         <div>

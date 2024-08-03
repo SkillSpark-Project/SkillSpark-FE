@@ -87,7 +87,7 @@ const Log = () => {
                 <img src={logo} className="w-2/6 m-auto" />
               </a>
 
-              <div className="font-bold py-3 text-xl">Đăng Nhập</div>
+              <div className="font-semibold py-3 text-xl">Đăng Nhập</div>
               <Form
                 name="basic"
                 initialValues={{
@@ -109,7 +109,6 @@ const Log = () => {
                   <Input
                     disabled={isLoading}
                     allowClear
-                    onChange={(e) => setEmail(e.target.value)}
                     size="large"
                     placeholder="Tên đăng nhập hoặc địa chỉ email"
                     className="border-black transition-all duration-300 input-hover-green"
@@ -129,7 +128,6 @@ const Log = () => {
                   <Input.Password
                     disabled={isLoading}
                     allowClear
-                    onChange={(e) => setPass(e.target.value)}
                     size="large"
                     placeholder="Mật khẩu"
                     prefix={<LockOutlined />}
